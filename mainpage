@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>四方珈琲プロジェクト | Lab Coffee Subscription</title>
+  <meta name="description" content="研究室内の団らんと朝のコーヒー提供。月額600円のコーヒーサブスクと、朝食(予定)のご案内。" />
+  <style>
+    :root{
+      --bg:#0f0f10;
+      --card:#17181a;
+      --text:#f5f6f7;
+      --muted:#b8bcc2;
+      --accent:#d9a441; /* coffee */
+      --line:#2a2c30;
+      --ok:#74d99f;
+      --warn:#f3c969;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
+                   "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+      background: radial-gradient(1200px 600px at 20% 0%, #1b1b1e 0%, var(--bg) 55%);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 64px}
+    header{
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+      border-bottom:1px solid var(--line);
+      padding:8px 0 18px;
+      position:sticky; top:0; backdrop-filter: blur(8px);
+      background: rgba(15,15,16,.75);
+      z-index:10;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), #8c5b1f);
+      display:grid; place-items:center; font-weight:800; color:#141414;
+    }
+    .brand h1{font-size:15px; margin:0}
+    nav{display:flex; gap:12px; flex-wrap:wrap}
+    nav a{
+      text-decoration:none; color:var(--muted);
+      font-size:13px; padding:8px 10px; border-radius:10px;
+    }
+    nav a:hover{background:#ffffff10; color:var(--text)}
+    .hero{
+      padding:28px 0 14px;
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width:860px){
+      .hero{grid-template-columns:1fr}
+    }
+    .card{
+      background:linear-gradient(180deg, #1b1c1f, var(--card));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      color:var(--muted); font-size:13px;
+    }
+    .dot{width:9px; height:9px; background:var(--accent); border-radius:99px; display:inline-block}
+    .hero h2{
+      margin:10px 0 8px; font-size:30px; line-height:1.2;
+    }
+    .hero p{margin:0; color:var(--muted)}
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid var(--line);
+      background:#ffffff10;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent), #b8792c);
+      border-color:transparent;
+      color:#141414;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background:#ffffff08;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .price{
+      font-size:28px; font-weight:900; margin:10px 0 8px;
+    }
+    .small{font-size:12px; color:var(--muted)}
+    h3{margin:0 0 8px; font-size:16px}
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    section{margin-top:18px}
+    .hr{height:1px; background:var(--line); margin:18px 0}
+    .two{
+      display:grid; grid-template-columns:1fr 1fr; gap:12px;
+    }
+    @media (max-width:860px){ .two{grid-template-columns:1fr} }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      border-radius:14px; padding:10px 12px;
+      border:1px dashed var(--line); background:#ffffff07;
+      color:var(--muted); font-size:13px;
+    }
+    .ok{color:var(--ok)}
+    .warn{color:var(--warn)}
+    footer{
+      margin-top:28px;
+      color:var(--muted);
+      font-size:12px;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+    }
+    code{
+      background:#00000040;
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid #ffffff10;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">☕</div>
+        <div>
+          <h1>四方珈琲プロジェクト</h1>
+          <div class="small">研究室内の団らんと、朝のコーヒー。</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">概要</a>
+        <a href="#sub">サブスク</a>
+        <a href="#breakfast">朝食</a>
+        <a href="#howto">利用方法</a>
+        <a href="#rules">ルール</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="card">
+        <div class="kicker"><span class="dot"></span>Lab community / Morning routine</div>
+        <h2>朝のコーヒーで、研究室に“来る理由”を。</h2>
+        <p>
+          四方珈琲は、研究室内のコミュニケーションと日々の快適さをつくるための小さな仕組みです。
+          コーヒーは安定品質の豆で提供し、運用は「続けられる」ことを最優先にしています。
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#sub">サブスクを見る</a>
+          <a class="btn" href="#howto">利用方法</a>
+          <a class="btn" href="#breakfast">朝食（計画中）</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="grid">
+          <div class="pill">☑ 大容量ドリップ運用 <span class="ok">OK</span></div>
+          <div class="pill">☑ 温度・香りキープ（魔法瓶） <span class="ok">OK</span></div>
+          <div class="pill">☑ 当番でもブレにくいレシピ <span class="ok">OK</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="badge">現在運用中</span>
+        <div class="price">¥600<span class="small"> / 月（1人）</span></div>
+        <div class="small">コーヒーサブスク（研究室内向け）</div>
+        <ul>
+          <li>提供：研究室内（セルフ）</li>
+          <li>目安：1杯 <code>180mL</code> / 粉 <code>10g</code></li>
+          <li>味がブレにくい運用を重視</li>
+        </ul>
+        <div class="hr"></div>
+        <div class="small">
+          ※朝食は別料金（1食あたり約300円・個数限定）で検討中。
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="card">
+      <h3>概要</h3>
+      <ul>
+        <li>目的：研究室内の団らん／朝の習慣づくり</li>
+        <li>コーヒー：粉（例：セブン）を研究室でドリップ</li>
+        <li>器具：Kalita 104-D（7〜12人用）＋ 象印 SH-HC15-NU（1.5L）など</li>
+      </ul>
+    </section>
+
+    <section id="sub" class="two">
+      <div class="card">
+        <h3>コーヒーサブスク</h3>
+        <ul>
+          <li>料金：<b>600円／月</b></li>
+          <li>対象：研究室メンバー</li>
+          <li>運用：セルフ／当番で補充</li>
+          <li>目安レシピ：<code>10g</code> → <code>180mL</code></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>提供量の目安</h3>
+        <ul>
+          <li>7杯分：<code>約1.25〜1.3L</code></li>
+          <li>10杯分：<code>約1.8L</code>（※1.5Lポットなら2回運用）</li>
+          <li>保温：抽出前にポットを予熱すると伸びます</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="breakfast" class="card">
+      <h3>朝食（計画中）</h3>
+      <ul>
+        <li>価格：<b>300円／食</b>（予定）</li>
+        <li>方式：個数限定／先着 or 予約制</li>
+        <li>候補：ホットサンド（卵など）・おにぎり</li>
+      </ul>
+      <div class="small warn">※食品提供は衛生・当番負担・売れ残りゼロ運用を優先して設計します。</div>
+    </section>
+
+    <section id="howto" class="card">
+      <h3>利用方法</h3>
+      <ul>
+        <li>サブスク希望：当番または運営者へ（料金：600円/月）</li>
+        <li>飲んだら：マグを洗う／周りを軽く拭く</li>
+        <li>最後の人：ポット洗浄・乾燥（できる範囲でOK）</li>
+      </ul>
+    </section>
+
+    <section id="rules" class="card">
+      <h3>ゆるいルール（揉めないための最低限）</h3>
+      <ul>
+        <li>他人のマグを勝手に使わない</li>
+        <li>こぼしたら拭く（次の人が気持ちよく使える）</li>
+        <li>豆・フィルターの在庫が少なければ共有する</li>
+      </ul>
+      <div class="hr"></div>
+      <div class="small">
+        連絡先：ここに <code>担当者名</code> / <code>Slackチャンネル</code> / <code>フォームURL</code> を入れると完成です。
+      </div>
+    </section>
+
+    <footer>
+      <div>© 四方珈琲プロジェクト（研究室内企画）</div>
+      <div class="small">※内容は運用状況に応じて随時更新します。</div>
+    </footer>
+  </div>
+</body>
+</html>
